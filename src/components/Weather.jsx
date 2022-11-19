@@ -7,7 +7,7 @@ const Weather = ({ setIsClicked, name }) => {
   useEffect(() => {
     const getWeather = async () => {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${apiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.REACT_APP_WEATHER_API}&units=metric`
       );
 
       const weatherData = await response.json();
