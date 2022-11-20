@@ -3,9 +3,11 @@ import Weather from './Weather';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
+import Trivia from './Trivia';
 const CountryCard = ({ name }) => {
   const [country, setCountry] = useState(null);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isWeatherClicked, setIsWeatherClicked] = useState(false);
+  const [isTriviaClicked, setIsTriviaClicked] = useState(false);
   useEffect(() => {
     const getCountries = async () => {
       const response = await fetch(
@@ -57,12 +59,14 @@ const CountryCard = ({ name }) => {
     coinSymbol,
   } = country;
   const getWeather = () => {
-    setIsClicked(true);
+    setIsWeatherClicked(true);
   };
-
+  const playTrivia = () => {
+    setIsTriviaClicked(true);
+  };
   return (
     <>
-      {!isClicked && (
+      {!isWeatherClicked && !isTriviaClicked && (
         <div className="card m-auto" style={{ width: '22rem' }}>
           <div className="card-body">
             <h5 className="card-title">
@@ -122,14 +126,23 @@ const CountryCard = ({ name }) => {
               >
                 Weather
               </button>
-              <button className="btn btn-primary mx-2 my-2">dddd</button>
-              <button className="btn btn-primary mx-2 my-2">dddd</button>
+              <button
+                onClick={playTrivia}
+                className="btn btn-primary mx-2 my-2"
+              >
+                Trivia
+              </button>
+          
             </li>
           </ul>
         </div>
       )}
 
-      {isClicked && <Weather name={name} setIsClicked={setIsClicked} />}
+      {isWeatherClicked && !isTriviaClicked && (
+        <Weather name={name} setIsWeatherClicked={setIsWeatherClicked} />
+      )}
+
+      {isTriviaClicked && !isWeatherClicked && <Trivia setIsTriviaClicked={setIsTriviaClicked} />}
     </>
   );
 };

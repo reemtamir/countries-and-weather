@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
-
-import { apiKey, getTime } from '../script';
-const Weather = ({ setIsClicked, name }) => {
+import { getTime } from '../script';
+const Weather = ({ setIsWeatherClicked, name }) => {
   const [countryWeather, setCountryWeather] = useState(null);
   useEffect(() => {
     const getWeather = async () => {
@@ -41,7 +40,7 @@ const Weather = ({ setIsClicked, name }) => {
     sys: { sunrise, sunset },
   } = countryWeather;
   const remove = () => {
-    setIsClicked(false);
+    setIsWeatherClicked(false);
   };
 
   let sunriseTime = new Date(sunrise * 1000);
