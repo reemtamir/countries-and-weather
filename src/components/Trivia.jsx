@@ -143,7 +143,7 @@ const Trivia = ({ setIsTriviaClicked }) => {
             </label>
           </div>
         </div>
-        <div className="d-flex justify-content-around my-5">
+        <div className="d-flex justify-content-between my-5">
           <p className="fs-3 text-primary">
             Score: {points} out of {numOfQuestions}
           </p>{' '}

@@ -1,3 +1,4 @@
+import { imageListClasses } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 const Holydays = ({ countryCode, setIsHolydaysClicked }) => {
@@ -27,15 +28,23 @@ const Holydays = ({ countryCode, setIsHolydaysClicked }) => {
   };
   return (
     <>
-      {!holydays.length && <p>no data</p>}
+      {!holydays.length && (
+        <div>
+          <img
+            className="w-50"
+            src="https://i.pinimg.com/originals/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.png"
+            alt="no data image"
+          />
+        </div>
+      )}
 
       {holydays.length > 0 && (
-        <table className="table text-danger">
+        <table className="table w-50 m-auto bg-warning">
           <thead>
-            <tr>
+            <tr className="text-danger">
               <th scope="col">#</th>
               <th scope="col">Date</th>
-              <th scope="col">name</th>
+              <th scope="col">Holyday name</th>
             </tr>
           </thead>
           <tbody>
@@ -43,7 +52,7 @@ const Holydays = ({ countryCode, setIsHolydaysClicked }) => {
               const { date, name } = holyday;
 
               return (
-                <tr key={index}>
+                <tr key={index} className="text-primary">
                   <th scope="row">{index + 1}</th>
                   <td>{convertDigitIn(date)}</td>
                   <td>{name}</td>
@@ -53,7 +62,7 @@ const Holydays = ({ countryCode, setIsHolydaysClicked }) => {
           </tbody>
         </table>
       )}
-      <button onClick={remove} className="btn btn-primary">
+      <button onClick={remove} className="btn btn-primary mt-3">
         Back
       </button>
     </>
