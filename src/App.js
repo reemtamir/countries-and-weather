@@ -12,7 +12,7 @@ function App() {
       <div
         style={{
           backgroundColor: isDark ? 'black' : 'white',
-          color: isDark ? 'white' : 'black',
+          color: isDark ? 'red' : 'black',
         }}
         className="App vh-100% m-auto text-center"
       >
@@ -22,6 +22,7 @@ function App() {
         >
           Countries
         </h1>
+
         <CountriesList />
         <button onClick={handleClick} className="btn btn-danger mt-4  ">
           {isDark ? 'Day mode' : 'Dark mode'}

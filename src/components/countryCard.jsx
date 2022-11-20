@@ -4,10 +4,13 @@ import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import Trivia from './Trivia';
+import Holydays from './Holydays';
 const CountryCard = ({ name }) => {
   const [country, setCountry] = useState(null);
   const [isWeatherClicked, setIsWeatherClicked] = useState(false);
   const [isTriviaClicked, setIsTriviaClicked] = useState(false);
+  const [isHolidaysClicked, setIsHolydaysClicked] = useState(false);
+
   useEffect(() => {
     const getCountries = async () => {
       const response = await fetch(
@@ -17,6 +20,7 @@ const CountryCard = ({ name }) => {
       const countriesData = await response.json();
 
       const chosenCountry = countriesData[0];
+
       const {
         flags: { svg },
         maps: { googleMaps: map },
@@ -25,7 +29,10 @@ const CountryCard = ({ name }) => {
         capital,
         languages,
         currencies,
+        altSpellings,
       } = chosenCountry;
+
+      const countryCode = altSpellings[0];
 
       const [first] = Object.entries(currencies);
 
@@ -41,6 +48,7 @@ const CountryCard = ({ name }) => {
         languages,
         coinName,
         coinSymbol,
+        countryCode,
       });
     };
 
@@ -64,9 +72,13 @@ const CountryCard = ({ name }) => {
   const playTrivia = () => {
     setIsTriviaClicked(true);
   };
+
+  const showHolydays = () => {
+    setIsHolydaysClicked(true);
+  };
   return (
     <>
-      {!isWeatherClicked && !isTriviaClicked && (
+      {!isWeatherClicked && !isTriviaClicked && !isHolidaysClicked && (
         <div className="card m-auto" style={{ width: '22rem' }}>
           <div className="card-body">
             <h5 className="card-title">
@@ -132,17 +144,30 @@ const CountryCard = ({ name }) => {
               >
                 Trivia
               </button>
-          
+              <button
+                onClick={showHolydays}
+                className="btn btn-primary mx-2 my-2"
+              >
+                Holydays
+              </button>
             </li>
           </ul>
         </div>
       )}
 
-      {isWeatherClicked && !isTriviaClicked && (
+      {isWeatherClicked && !isTriviaClicked && !isHolidaysClicked && (
         <Weather name={name} setIsWeatherClicked={setIsWeatherClicked} />
       )}
 
-      {isTriviaClicked && !isWeatherClicked && <Trivia setIsTriviaClicked={setIsTriviaClicked} />}
+      {isTriviaClicked && !isWeatherClicked && !isHolidaysClicked && (
+        <Trivia setIsTriviaClicked={setIsTriviaClicked} />
+      )}
+      {isHolidaysClicked && !isWeatherClicked && !isTriviaClicked && (
+        <Holydays
+          setIsHolydaysClicked={setIsHolydaysClicked}
+          countryCode={country.countryCode}
+        />
+      )}
     </>
   );
 };
