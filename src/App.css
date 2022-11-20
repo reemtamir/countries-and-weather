@@ -2,3 +2,16 @@
   -webkit-box-shadow: 0px 0px 16px 19px #000000, 0px 0px 16px 19px #000000;
   box-shadow: 0px 0px 16px 19px #000000, 0px 0px 16px 19px #000000;
 }
+.trivia {
+  position: relative;
+  animation: move forwards 3s;
+}
+@keyframes move {
+  0% {
+    left: -1500px;
+  }
+
+  100% {
+    left: 0;
+  }
+}

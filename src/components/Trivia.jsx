@@ -108,7 +108,7 @@ const Trivia = ({ setIsTriviaClicked }) => {
 
   return (
     <>
-      <div className="w-75 m-auto mb-5">
+      <div className="w-75 m-auto mb-5 trivia">
         <div className="w-25 m-auto mt-3">
           <div className="form-check   ">
             <input
